@@ -11,6 +11,10 @@
           "msg":"恭喜 曹子芳 打卡成功！",
           "name":"郑童遥",
           "type":"USER_CLOCK_PUSH"}-->
+          <div class="cardnum-box">
+            <span>当前打卡次数</span>
+            <Numbercard class="card-box" :cardNum="Number(initArr.length+1)"></Numbercard>
+          </div>
           <div class="msg-box">
             <ul v-if="CardPartsStatisticsList&&CardPartsStatisticsList.length>0">
               <li v-for="(item, index) in CardPartsStatisticsList" :key="index">
@@ -32,22 +36,28 @@
             </div>-->
             <div v-else>暂无打卡信息</div>
           </div>
-          <div class="img-box">
+          <!-- <div class="img-box">
             <img class="baseImg" src="../assets/images/foot.png" alt>
             <img class="roteImg" src="../assets/images/foot1.png" alt>
-          </div>
+          </div>-->
         </div>
         <div class="right-box">
           <div class="right-top">
             <span class="title-span">打卡列表</span>
+            <div class="title-list">
+              <div class="DataList_left"></div>
+              <div class="DataList_left">姓名</div>
+              <div class="DataList_left">打卡时间</div>
+              <div class="DataList_left">打卡地点</div>
+            </div>
             <vue-seamless-scroll :data="initArr" class="seamless-warp" :class-option="classOption">
               <ul>
-                <li>
+                <!-- <li>
                   <div class="DataList_left"></div>
                   <div class="DataList_left">姓名</div>
                   <div class="DataList_left">打卡时间</div>
                   <div class="DataList_left">打卡地点</div>
-                </li>
+                </li>-->
                 <li class="DataList_top" v-for="(item,index) in initArr" :key="index">
                   <div class="DataList_left">
                     <span>{{index+1}}</span>
@@ -69,20 +79,91 @@
       </div>
       <div class="bot-box">
         <div class="bot-left">
-          <div class="chart-box">
-            <Echars :option="leftOption"></Echars>
+          <span class="title-span">实时天气</span>
+          <div class="tq-content">
+            <div class="tqimg-box">
+              <img style="width:190px" :src="tqimgUrl" alt>
+            </div>
+            <div class="tqmsg-box">
+              <div>
+                <span class="nowtem-box jbtext" style="margin-right:10px">{{tqObj&&tqObj.tem}}℃</span>
+                <div>
+                  <div class="jbtext" style="margin-right:10px">{{tqObj&&tqObj.city}}</div>
+                  <div class="jbtext">{{tqObj&&tqObj.wea}}</div>
+                </div>
+              </div>
+              <div>
+                <span
+                  class="jbtext"
+                  style="margin-right:10px"
+                >{{tqObj&&tqObj.tem2}}℃~{{tqObj&&tqObj.tem1}}℃</span>
+                <span class="jbtext">{{tqObj&&tqObj.win}} {{tqObj&&tqObj.win_speed}}</span>
+              </div>
+              <div>
+                <span class="jbtext">湿度:</span>
+                <span class="jbtext">{{tqObj&&tqObj.humidity}} 湿度</span>
+              </div>
+            </div>
+            <!-- <Echars :option="leftOption"></Echars> -->
           </div>
-          <div class="chart-box">
-            <Echars :option="leftOption1"></Echars>
+          <div class="nowtime-box">
+            <div class="min-box">{{nowMin}}</div>
+            <div class="nowdate-box">
+              <span class="jbtext">{{nowDate}}</span>
+              <span class="jbtext">{{tqObj&&tqObj.week}}</span>
+              <span class="jbtext">(每两小时自动更新)</span>
+            </div>
+            <div class="jbtext">{{tqObj&&tqObj.air_tips}}</div>
+            <!-- <Echars :option="leftOption1"></Echars> -->
           </div>
         </div>
         <div class="bot-right">
-          <div class="chart-box">
+          <ul>
+            <li>
+              <span class="tqlist-box jbtext">空气质量等级:</span>
+              <span
+                class="tqlist-box jbtext"
+              >{{tqObj&&tqObj.aqi.air}} / {{tqObj&&tqObj.aqi.air_level}}</span>
+            </li>
+            <li>
+              <span class="tqlist-box jbtext">PM2.5等级描述:</span>
+              <span
+                class="tqlist-box jbtext"
+              >{{tqObj&&tqObj.aqi.pm25}} / {{tqObj&&tqObj.aqi.pm25_desc}}</span>
+            </li>
+            <li>
+              <span class="tqlist-box jbtext">PM10等级描述:</span>
+              <span
+                class="tqlist-box jbtext"
+              >{{tqObj&&tqObj.aqi.pm10}} / {{tqObj&&tqObj.aqi.pm10_desc}}</span>
+            </li>
+            <li>
+              <span class="tqlist-box jbtext">o3等级描述:</span>
+              <span class="tqlist-box jbtext">{{tqObj&&tqObj.aqi.o3}} / {{tqObj&&tqObj.aqi.o3_desc}}</span>
+            </li>
+            <li>
+              <span class="tqlist-box jbtext">no2等级描述:</span>
+              <span
+                class="tqlist-box jbtext"
+              >{{tqObj&&tqObj.aqi.no2}} / {{tqObj&&tqObj.aqi.no2_desc}}</span>
+            </li>
+            <li>
+              <span class="tqlist-box jbtext">so2等级描述:</span>
+              <span
+                class="tqlist-box jbtext"
+              >{{tqObj&&tqObj.aqi.so2}} / {{tqObj&&tqObj.aqi.so2_desc}}</span>
+            </li>
+            <!-- <li>
+              <span>so2等级描述:</span>
+              <span>{{tqObj&&tqObj.co_desc}}</span>
+            </li>-->
+          </ul>
+          <!-- <div class="chart-box">
             <Echars :option="leftOption2"></Echars>
           </div>
           <div class="chart-box">
             <Echars :option="leftOption3"></Echars>
-          </div>
+          </div>-->
         </div>
       </div>
       <!-- <div class="middle-box">
@@ -96,18 +177,30 @@
 
 <script>
 import Header from "../components/Header";
-import Echars from "../components/Echarts";
+// import Echars from "../components/Echarts";
+import Numbercard from "../components/Numbercard";
+import axios from "axios";
 export default {
   name: "home-box",
   components: {
     Header,
-    Echars
+    // Echars,
+    Numbercard
   },
   computed: {
+    tqimgUrl() {
+      // return 123;
+      // console.log(this.tqObj.wea_img);
+      if (this.tqObj) {
+        return require(`../assets/images/tq/${this.tqObj.wea_img}.png`);
+      } else {
+        return "";
+      }
+    },
     classOption() {
       return {
         step: 0.2, // 数值越大速度滚动越快
-        limitMoveNum: 10, // 开始无缝滚动的数据量 this.dataList.length
+        limitMoveNum: 5, // 开始无缝滚动的数据量 this.dataList.length
         hoverStop: true, // 是否开启鼠标悬停stop
         direction: 1, // 0向下 1向上 2向左 3向右
         openWatch: true, // 开启数据实时监控刷新dom
@@ -122,25 +215,65 @@ export default {
     return {
       websock: null,
       redata: null,
+      tqObj: null,
+      nowDate: "",
+      nowMin: "",
+      cardNum: 0,
       hosptaloption: {},
       leftOption: {},
       leftOption1: {},
       leftOption2: {},
       leftOption3: {},
       leftOptionyb: {},
-      initArr: [],
-      CardPartsStatisticsList: [
+      initArr: [
         // {
         //   name: "郑童遥",
+        //   index: 2,
         //   clockDate: "2021-03-30 18:06:37",
         //   times: "2021-03-30 18:06:37",
         //   address: "食堂后门2号点"
         // },
         // {
         //   name: "郑童遥",
+        //   index: 12,
         //   clockDate: "2021-03-30 18:06:37",
+        //   times: "2021-03-30 18:06:37",
+        //   address: "食堂后门2号点"
+        // },
+        // {
+        //   name: "郑童遥",
+        //   index: 512,
+        //   clockDate: "2021-03-30 18:06:37",
+        //   times: "2021-03-30 18:06:37",
+        //   address: "食堂后门2号点"
+        // },
+        // {
+        //   name: "郑童遥",
+        //   index: 3312,
+        //   clockDate: "2021-03-30 18:06:37",
+        //   times: "2021-03-30 18:06:37",
+        //   address: "食堂后门2号点"
+        // },
+        // {
+        //   name: "郑童遥",
+        //   index: 3312,
+        //   clockDate: "2021-03-30 18:06:37",
+        //   times: "2021-03-30 18:06:37",
         //   address: "食堂后门2号点"
         // }
+      ],
+      CardPartsStatisticsList: [
+        // {
+        //   name: "郑童遥",
+        //   clockDate: "2021-03-30 18:06:37",
+        //   times: "2021-03-30 18:06:37",
+        //   address: "食堂后门2号点"
+        // }
+        // {
+        //   name: "郑童遥",
+        //   clockDate: "2021-03-30 18:06:37",
+        //   address: "食堂后门2号点"
+        // },
         // {
         //   name: "郑童遥",
         //   clockDate: "2021-03-30 18:06:37",
@@ -182,12 +315,24 @@ export default {
   created() {
     this.initWebSocket();
     this.initData();
+    setInterval(() => {
+      this.getTime();
+      // this.cardNum = Math.floor(Math.random() * 100);
+      // console.log(this.cardNum);
+      // this.initArr.push({
+      //   name: "郑童遥",
+      //   clockDate: "2021-03-30 18:06:37",
+      //   address: "食堂后门2号点"
+      // });
+    }, 60000);
   },
   destroyed() {
     this.websock.close(); //离开路由之后断开websocket连接
   },
   methods: {
     initData() {
+      this.getTime();
+      this.getTq();
       this.gethosptaloption();
       this.getleftOption();
       this.getleftOptionyb();
@@ -195,6 +340,29 @@ export default {
       //   let aa = (Math.random() * 100).toFixed(2) - 0;
       //   this.getleftOptionyb(aa);
       // }, 2000);
+    },
+    getTime() {
+      this.nowDate = this.$moment().format("YYYY/MM/DD");
+      this.nowMin = this.$moment().format("HH:mm");
+    },
+    getTq() {
+      // 上面的请求也可以这样做
+      axios
+        .get("https://v0.yiketianqi.com/api", {
+          params: {
+            appid: "11554842",
+            appsecret: "W7nSWX8u",
+            version: "v61",
+            city: "三亚"
+          }
+        })
+        .then(response => {
+          // console.log(response);
+          this.tqObj = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     initWebSocket() {
       console.log("开始");
@@ -1139,6 +1307,8 @@ export default {
         width: 900px;
         height: 550px;
         display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         position: relative;
@@ -1148,13 +1318,25 @@ export default {
           font-size: 23px;
           color: #44c9de;
         }
+        .cardnum-box {
+          width: 100%;
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          .card-box {
+          }
+          > span {
+            font-size: 40px;
+            margin-top: -24px;
+          }
+        }
         .msg-box {
-          position: absolute;
-          height: 300px;
+          // position: absolute;
+          height: 330px;
           font-size: 15px;
           letter-spacing: 3px;
           top: 40px;
-          width: 80%;
+          width: 95%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -1163,7 +1345,10 @@ export default {
             border: 1px solid #ffffff30;
             border-radius: 10px;
             li {
-              padding: 8px 0;
+              padding: 6px 0;
+              p {
+                margin: 4px 0;
+              }
               &:first-child {
                 border-radius: 10px 10px 0 0;
               }
@@ -1241,6 +1426,7 @@ export default {
           // font-weight: bold;
           margin-top: -8px;
         }
+
         > div {
           background: url("../assets/images/smallkuang.png") no-repeat;
           background-size: 100% 100%;
@@ -1248,9 +1434,46 @@ export default {
           height: 100%;
           position: relative;
           display: flex;
+          flex-wrap: wrap;
           justify-content: center;
-          align-items: center;
-          padding-top: 30px;
+          // border: 1px solid red;
+          // align-items: center;
+          // padding-top: 30px;
+          .title-list {
+            width: 98%;
+            display: flex;
+            padding: 20px 0;
+            background: #1e3c52;
+            margin-top: 30px;
+            > div {
+              margin-right: 10px;
+              width: 350px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              &:first-child {
+                width: 50px;
+                span {
+                  padding: 5px;
+                  min-width: 25px;
+                  height: 25px;
+                  line-height: 25px;
+                  text-align: center;
+                  display: inline-block;
+                  border-radius: 6px;
+                  // background: $maincolor;
+                  background: #04b7e070;
+                  border: 1px solid $maincolor;
+                }
+              }
+              &:nth-child(2) {
+                width: 100px;
+              }
+            }
+          }
           > span {
             position: absolute;
             top: 0;
@@ -1260,9 +1483,9 @@ export default {
 
           .seamless-warp {
             width: 100%;
-            height: calc(100% - 16px);
+            height: calc(100% - 96px);
             overflow: hidden;
-            margin: 10px;
+            margin: 0 10px;
             ul {
               li {
                 display: flex;
@@ -1273,8 +1496,10 @@ export default {
                     font-weight: bold;
                   }
                 }
+                border-bottom: 1px dashed #44c9de80;
+
                 &:nth-child(odd) {
-                  background: #1e3c52;
+                  // background: #1e3c52;
                 }
                 > div {
                   margin-right: 10px;
@@ -1289,13 +1514,15 @@ export default {
                     width: 50px;
                     span {
                       padding: 5px;
-                      width: 15px;
-                      height: 15px;
-                      line-height: 15px;
+                      min-width: 25px;
+                      height: 25px;
+                      line-height: 25px;
                       text-align: center;
                       display: inline-block;
-                      border-radius: 20px;
-                      background: $maincolor;
+                      border-radius: 6px;
+                      // background: $maincolor;
+                      background: #04b7e070;
+                      border: 1px solid $maincolor;
                     }
                   }
                   &:nth-child(2) {
@@ -1309,17 +1536,149 @@ export default {
       }
     }
     .bot-box {
+      .jbtext {
+        text-align: left;
+        // text-indent: 30px;
+
+        font-weight: bolder;
+        position: relative;
+        background-image: -webkit-linear-gradient(
+          bottom,
+          #0588c7,
+          #2ca9e2,
+          #5fc5fc
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
       display: flex;
       justify-content: space-between;
+      .bot-right {
+        background: url("../assets/images/bggif.gif") no-repeat;
+        background-size: 100% 100%;
+        ul {
+          width: 95%;
+          height: 80%;
+          position: relative;
+          li {
+            position: absolute;
+            border: 1px solid #5fc5fc50;
+            background: #5fc5fc30;
+            border-radius: 5px;
+            padding: 2px 5px;
+            span {
+              font-size: 22px;
+              &:first-child {
+                margin-right: 10px;
+              }
+            }
+            &:first-child {
+              top: 10px;
+              left: 120px;
+            }
+            &:nth-child(2) {
+              top: 50%;
+              transform: translateY(-50%);
+              left: 20px;
+            }
+            &:nth-child(3) {
+              bottom: 10px;
+              left: 120px;
+            }
+            &:nth-child(4) {
+              top: 10px;
+              right: 120px;
+            }
+            &:nth-child(5) {
+              top: 50%;
+              transform: translateY(-50%);
+              right: 20px;
+            }
+            &:last-child {
+              bottom: 10px;
+              right: 120px;
+            }
+          }
+        }
+      }
       > div {
         background: url("../assets/images/kuang.png") no-repeat;
         background-size: 100% 100%;
         width: 900px;
-        height: 260px;
+        height: 300px;
         display: flex;
         justify-content: space-around;
         align-items: center;
+        position: relative;
+        .title-span {
+          font-size: 23px;
+          color: #44c9de;
+          // font-weight: bold;
+          margin-top: -8px;
+          position: absolute;
+          left: 50%;
+          top: -5px;
+          transform: translateX(-50%);
+        }
+        .tq-content {
+          // border: 1px solid blue;
+          width: 48%;
+          height: 80%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          .tqimg-box {
+          }
+          .tqmsg-box {
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: flex-start;
+            > div {
+              display: flex;
+              align-items: center;
 
+              .nowtem-box {
+                line-height: 50px;
+                font-size: 40px;
+              }
+            }
+          }
+        }
+        .nowtime-box {
+          // border: 1px solid blue;
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+          width: 48%;
+          height: 80%;
+          .nowdate-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            span {
+              margin: 0 10px;
+            }
+          }
+          .min-box {
+            // border: 1px solid red;
+            font-family: "微软雅黑", "Dosis", sans-serif;
+            font-size: 120px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-weight: bolder;
+            position: relative;
+
+            color: #5fc5fc;
+            text-shadow: 0px 1px 0px #0588c7, 0px 2px 0px #0588c7,
+              0px 3px 0px #0588c7, 0px 4px 0px #0588c7,
+              0px 5px 10px rgba(0, 0, 0, 0.6);
+          }
+        }
         .chart-box {
           width: 45%;
           height: 80%;

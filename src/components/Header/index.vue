@@ -1,25 +1,25 @@
 <template>
   <div class="header-box">
-    <div class="time-box">{{nowTime}} {{tqObj.week}}</div>
+    <div class="time-box">{{nowTime}}</div>
     <div class="title-box">崖州区无感考勤系统</div>
     <div class="tq-box">
-      {{tqObj.wea}}
+      <!-- {{tqObj.wea}}
       {{tqObj.win}}
       {{tqObj.win_speed}}
       {{tqObj.tem}}℃
-      {{tqObj.air_level}}
+      {{tqObj.air_level}}-->
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   data() {
     return {
       timer: null,
-      nowTime: "",
-      tqObj: {}
+      nowTime: ""
+      // tqObj: {}
     };
   },
   created() {
@@ -29,22 +29,22 @@ export default {
   methods: {
     initData() {
       // 上面的请求也可以这样做
-      axios
-        .get("https://v0.yiketianqi.com/api", {
-          params: {
-            appid: "11554842",
-            appsecret: "W7nSWX8u",
-            version: "v61",
-            city: "三亚"
-          }
-        })
-        .then(response => {
-          // console.log(response);
-          this.tqObj = response.data;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      // axios
+      //   .get("https://v0.yiketianqi.com/api", {
+      //     params: {
+      //       appid: "11554842",
+      //       appsecret: "W7nSWX8u",
+      //       version: "v61",
+      //       city: "三亚"
+      //     }
+      //   })
+      //   .then(response => {
+      //     // console.log(response);
+      //     this.tqObj = response.data;
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //   });
       this.timer = setInterval(() => {
         this.nowTime = this.$moment().format("YYYY年MM月DD HH:mm:ss");
       }, 1000);
