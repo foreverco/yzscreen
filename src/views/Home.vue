@@ -12,22 +12,30 @@
           "name":"郑童遥",
           "type":"USER_CLOCK_PUSH"}-->
           <div class="cardnum-box">
-            <span>当前打卡次数</span>
-            <Numbercard class="card-box" :cardNum="Number(initArr.length+1)"></Numbercard>
+            <span>今日打卡次数</span>
+            <Numbercard
+              class="card-box"
+              :cardNum="Number(initArr.length)"
+            ></Numbercard>
           </div>
           <div class="msg-box">
-            <ul v-if="CardPartsStatisticsList&&CardPartsStatisticsList.length>0">
+            <ul
+              v-if="
+                CardPartsStatisticsList && CardPartsStatisticsList.length > 0
+              "
+            >
               <li v-for="(item, index) in CardPartsStatisticsList" :key="index">
                 <p>
-                  <span style="color:#F5713A;font-weight:bold">{{item.name}}</span>,您好！
+                  <span style="font-weight: bold">{{ item.name }}</span
+                  >,您好,您已打卡成功！
                 </p>
-                <p>
+                <!-- <p>
                   您于
-                  <span style="color:#F5713A;font-weight:bold">{{item.clockDate}}</span>
+                  <span style="font-weight:bold">{{item.clockDate}}</span>
                   在
-                  <span style="color:#F5713A;font-weight:bold">{{item.address}}</span>
+                  <span style="font-weight:bold">{{item.address}}</span>
                   打卡成功
-                </p>
+                </p> -->
               </li>
             </ul>
             <!-- <div v-if="redata">
@@ -50,7 +58,11 @@
               <div class="DataList_left">打卡时间</div>
               <div class="DataList_left">打卡地点</div>
             </div>
-            <vue-seamless-scroll :data="initArr" class="seamless-warp" :class-option="classOption">
+            <vue-seamless-scroll
+              :data="initArr"
+              class="seamless-warp"
+              :class-option="classOption"
+            >
               <ul>
                 <!-- <li>
                   <div class="DataList_left"></div>
@@ -58,13 +70,23 @@
                   <div class="DataList_left">打卡时间</div>
                   <div class="DataList_left">打卡地点</div>
                 </li>-->
-                <li class="DataList_top" v-for="(item,index) in initArr" :key="index">
+                <li
+                  class="DataList_top"
+                  v-for="(item, index) in initArr"
+                  :key="index"
+                >
                   <div class="DataList_left">
-                    <span>{{index+1}}</span>
+                    <span>{{ index + 1 }}</span>
                   </div>
-                  <div :title="item.name" class="DataList_left">{{item.name}}</div>
-                  <div :title="item.clockDate" class="DataList_left">{{item.times}}</div>
-                  <div :title="item.address" class="DataList_left">{{item.address}}</div>
+                  <div :title="item.name" class="DataList_left">
+                    {{ item.name }}
+                  </div>
+                  <div :title="item.clockDate" class="DataList_left">
+                    {{ item.times }}
+                  </div>
+                  <div :title="item.address" class="DataList_left">
+                    {{ item.address }}
+                  </div>
                 </li>
               </ul>
             </vue-seamless-scroll>
@@ -82,81 +104,92 @@
           <span class="title-span">实时天气</span>
           <div class="tq-content">
             <div class="tqimg-box">
-              <img style="width:190px" :src="tqimgUrl" alt>
+              <img style="width: 190px" :src="tqimgUrl" alt />
             </div>
             <div class="tqmsg-box">
               <div>
-                <span class="nowtem-box jbtext" style="margin-right:10px">{{tqObj&&tqObj.tem}}℃</span>
+                <span class="nowtem-box jbtext" style="margin-right: 10px"
+                  >{{ tqObj && tqObj.tem }}℃</span
+                >
                 <div>
-                  <div class="jbtext" style="margin-right:10px">{{tqObj&&tqObj.city}}</div>
-                  <div class="jbtext">{{tqObj&&tqObj.wea}}</div>
+                  <div class="jbtext" style="margin-right: 10px">
+                    {{ tqObj && tqObj.city }}
+                  </div>
+                  <div class="jbtext">{{ tqObj && tqObj.wea }}</div>
                 </div>
               </div>
               <div>
-                <span
-                  class="jbtext"
-                  style="margin-right:10px"
-                >{{tqObj&&tqObj.tem2}}℃~{{tqObj&&tqObj.tem1}}℃</span>
-                <span class="jbtext">{{tqObj&&tqObj.win}} {{tqObj&&tqObj.win_speed}}</span>
+                <span class="jbtext" style="font-size: 30px"
+                  >{{ tqObj && tqObj.tem2 }}℃~{{ tqObj && tqObj.tem1 }}℃</span
+                >
               </div>
               <div>
-                <span class="jbtext">湿度:</span>
-                <span class="jbtext">{{tqObj&&tqObj.humidity}} 湿度</span>
+                <span class="jbtext" style="font-size: 30px"
+                  >{{ tqObj && tqObj.win }} {{ tqObj && tqObj.win_speed }}</span
+                >
+              </div>
+              <div>
+                <span class="jbtext" style="font-size: 30px">湿度:</span>
+                <span class="jbtext" style="font-size: 30px"
+                  >{{ tqObj && tqObj.humidity }} 湿度</span
+                >
               </div>
             </div>
             <!-- <Echars :option="leftOption"></Echars> -->
           </div>
           <div class="nowtime-box">
-            <div class="min-box">{{nowMin}}</div>
+            <div class="min-box">{{ nowMin }}</div>
             <div class="nowdate-box">
-              <span class="jbtext">{{nowDate}}</span>
-              <span class="jbtext">{{tqObj&&tqObj.week}}</span>
-              <span class="jbtext">(每两小时自动更新)</span>
+              <span class="jbtext">{{ nowDate }}</span>
+              <span class="jbtext">{{ tqObj && tqObj.week }}</span>
+              <!-- <span class="jbtext">(每两小时自动更新)</span> -->
             </div>
-            <div class="jbtext">{{tqObj&&tqObj.air_tips}}</div>
+            <!-- <div class="tqcontent jbtext">{{ tqObj && tqObj.air_tips }}</div> -->
             <!-- <Echars :option="leftOption1"></Echars> -->
           </div>
         </div>
         <div class="bot-right">
           <ul>
             <li>
-              <span class="tqlist-box jbtext">空气质量等级:</span>
-              <span
-                class="tqlist-box jbtext"
-              >{{tqObj&&tqObj.aqi.air}} / {{tqObj&&tqObj.aqi.air_level}}</span>
+              <span class="tqlist-box jbtext">接入设备总数:</span>
+              <span class="tqlist-box jbtext">{{
+                (userObj.device && userObj.device.total) || 0
+              }}</span>
             </li>
             <li>
-              <span class="tqlist-box jbtext">PM2.5等级描述:</span>
-              <span
-                class="tqlist-box jbtext"
-              >{{tqObj&&tqObj.aqi.pm25}} / {{tqObj&&tqObj.aqi.pm25_desc}}</span>
+              <span class="tqlist-box jbtext">在线设备总数:</span>
+              <span class="tqlist-box jbtext">{{
+                (userObj.device && userObj.device.onlineCount) || 0
+              }}</span>
             </li>
             <li>
-              <span class="tqlist-box jbtext">PM10等级描述:</span>
-              <span
-                class="tqlist-box jbtext"
-              >{{tqObj&&tqObj.aqi.pm10}} / {{tqObj&&tqObj.aqi.pm10_desc}}</span>
+              <span class="tqlist-box jbtext">离线设备总数:</span>
+              <span class="tqlist-box jbtext">{{
+                (userObj.device && userObj.device.offlineCount) || 0
+              }}</span>
             </li>
             <li>
-              <span class="tqlist-box jbtext">o3等级描述:</span>
-              <span class="tqlist-box jbtext">{{tqObj&&tqObj.aqi.o3}} / {{tqObj&&tqObj.aqi.o3_desc}}</span>
+              <span class="tqlist-box jbtext"> 访客总数:</span>
+              <span class="tqlist-box jbtext">{{
+                (userObj.guest && userObj.guest.dayGuestCount) || 0
+              }}</span>
             </li>
             <li>
-              <span class="tqlist-box jbtext">no2等级描述:</span>
-              <span
-                class="tqlist-box jbtext"
-              >{{tqObj&&tqObj.aqi.no2}} / {{tqObj&&tqObj.aqi.no2_desc}}</span>
+              <span class="tqlist-box jbtext">预约访客人数:</span>
+              <span class="tqlist-box jbtext">{{
+                (userObj.guest && userObj.guest.reservationGuestCount) || 0
+              }}</span>
             </li>
             <li>
-              <span class="tqlist-box jbtext">so2等级描述:</span>
-              <span
-                class="tqlist-box jbtext"
-              >{{tqObj&&tqObj.aqi.so2}} / {{tqObj&&tqObj.aqi.so2_desc}}</span>
+              <span class="tqlist-box jbtext">临时访客人数:</span>
+              <span class="tqlist-box jbtext">
+                {{ (userObj.guest && userObj.guest.temGuestCount) || 0 }}</span
+              >
             </li>
             <!-- <li>
               <span>so2等级描述:</span>
-              <span>{{tqObj&&tqObj.co_desc}}</span>
-            </li>-->
+              <span>{{ tqObj && tqObj.co_desc }}</span>
+            </li> -->
           </ul>
           <!-- <div class="chart-box">
             <Echars :option="leftOption2"></Echars>
@@ -180,6 +213,7 @@ import Header from "../components/Header";
 // import Echars from "../components/Echarts";
 import Numbercard from "../components/Numbercard";
 import axios from "axios";
+// import { requserdriver } from "../api/home.js";
 export default {
   name: "home-box",
   components: {
@@ -219,12 +253,15 @@ export default {
       nowDate: "",
       nowMin: "",
       cardNum: 0,
+      userObj: {},
       hosptaloption: {},
       leftOption: {},
       leftOption1: {},
       leftOption2: {},
       leftOption3: {},
       leftOptionyb: {},
+      usertimer: null,
+      timetimer: null,
       initArr: [
         // {
         //   name: "郑童遥",
@@ -268,7 +305,17 @@ export default {
         //   clockDate: "2021-03-30 18:06:37",
         //   times: "2021-03-30 18:06:37",
         //   address: "食堂后门2号点"
-        // }
+        // },
+        // {
+        //   name: "郑童遥",
+        //   clockDate: "2021-03-30 18:06:37",
+        //   address: "食堂后门2号点"
+        // },
+        // {
+        //   name: "郑童遥",
+        //   clockDate: "2021-03-30 18:06:37",
+        //   address: "食堂后门2号点"
+        // },
         // {
         //   name: "郑童遥",
         //   clockDate: "2021-03-30 18:06:37",
@@ -288,17 +335,7 @@ export default {
         //   name: "郑童遥",
         //   clockDate: "2021-03-30 18:06:37",
         //   address: "食堂后门2号点"
-        // }
-        // {
-        //   name: "郑童遥",
-        //   clockDate: "2021-03-30 18:06:37",
-        //   address: "食堂后门2号点"
         // },
-        // {
-        //   name: "郑童遥",
-        //   clockDate: "2021-03-30 18:06:37",
-        //   address: "食堂后门2号点"
-        // }
         // {
         //   name: "郑童遥",
         //   clockDate: "2021-03-30 18:06:37",
@@ -315,7 +352,7 @@ export default {
   created() {
     this.initWebSocket();
     this.initData();
-    setInterval(() => {
+    this.timetimer = setInterval(() => {
       this.getTime();
       // this.cardNum = Math.floor(Math.random() * 100);
       // console.log(this.cardNum);
@@ -327,6 +364,10 @@ export default {
     }, 60000);
   },
   destroyed() {
+    clearInterval(this.timetimer);
+    this.timetimer = null;
+    clearInterval(this.usertimer);
+    this.timetimer = null;
     this.websock.close(); //离开路由之后断开websocket连接
   },
   methods: {
@@ -336,10 +377,30 @@ export default {
       this.gethosptaloption();
       this.getleftOption();
       this.getleftOptionyb();
+      this.getrequserdriver();
+      this.usertimer = setInterval(() => {
+        this.getrequserdriver();
+      }, 600000);
       // setInterval(() => {
       //   let aa = (Math.random() * 100).toFixed(2) - 0;
       //   this.getleftOptionyb(aa);
       // }, 2000);
+    },
+    getrequserdriver() {
+      // alert(123);
+      // requserdriver().then(res => {
+      //   console.log(res);
+      // });
+      axios
+        .get(`${window.config.proxyAddress}/nebula/getUserDevice`)
+        .then(response => {
+          // console.log(response);
+          this.userObj = response.data;
+          // this.tqObj = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     getTime() {
       this.nowDate = this.$moment().format("YYYY/MM/DD");
@@ -360,13 +421,13 @@ export default {
           // console.log(response);
           this.tqObj = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
     initWebSocket() {
-      console.log("开始");
-      console.log(window.config);
+      // console.log("开始");
+      // console.log(window.config);
 
       //初始化weosocket
       // const wsuri = "ws://172.18.1.180:8080/imserver/yazhoutuisong";
@@ -383,44 +444,45 @@ export default {
     websocketonopen() {
       //连接建立之后执行send方法发送数据
       let actions = { test: "12345" };
-      console.log("连接");
+      // console.log("连接");
       this.websocketsend(JSON.stringify(actions));
     },
     websocketonerror() {
       //连接建立失败重连
-      console.log("重连");
+      // console.log("重连");
       this.initWebSocket();
     },
     websocketonmessage(e) {
-      console.log(e);
-      console.log(this.websock);
+      // console.log(e);
+      // console.log(this.websock);
       //数据接收
       this.redata = JSON.parse(e.data);
       // const redata = JSON.parse(e.data);
-      console.log(this.redata);
-      let ispush = this.initArr.filter(item => {
-        return (
-          item.name === this.redata.name &&
-          item.clockDate === this.redata.clockDate &&
-          item.address === this.redata.address
-        );
-      });
-      if (ispush.length === 0) {
-        let obj = this.redata;
-        obj.times = this.$moment(obj.clockDate).format("HH:mm:ss");
-        this.initArr.unshift(obj);
-      }
+      // console.log(this.redata);
+      // let ispush = this.initArr.filter(item => {
+      //   return (
+      //     item.name === this.redata.name &&
+      //     item.clockDate === this.redata.clockDate &&
+      //     item.address === this.redata.address
+      //   );
+      // });
+      // if (ispush.length === 0) {
+      let obj = this.redata;
+      obj.times = this.$moment(obj.clockDate).format("HH:mm:ss");
+      this.initArr.unshift(obj);
+      // }
       this.CardPartsStatisticsList = this.initArr.slice(0, 5);
-      console.log(this.initArr);
+      // console.log(this.initArr);
     },
     websocketsend(Data) {
       //数据发送
-      console.log(Data);
+      // console.log(Data);
       this.websock.send(Data);
     },
     websocketclose(e) {
       //关闭
       console.log("断开连接", e);
+      this.websocketonerror();
     },
     gethosptaloption() {
       this.hosptaloption = {
@@ -1142,7 +1204,7 @@ export default {
         },
         polar: {},
         tooltip: {
-          formatter: function(params) {
+          formatter: function (params) {
             return (
               params.value[2] +
               " commits in " +
@@ -1178,11 +1240,11 @@ export default {
             name: "Punch Card",
             type: "scatter",
             coordinateSystem: "polar",
-            symbolSize: function(val) {
+            symbolSize: function (val) {
               return val[2] * 2;
             },
             data: data,
-            animationDelay: function(idx) {
+            animationDelay: function (idx) {
               return idx * 5;
             }
           }
@@ -1333,7 +1395,6 @@ export default {
         .msg-box {
           // position: absolute;
           height: 330px;
-          font-size: 15px;
           letter-spacing: 3px;
           top: 40px;
           width: 95%;
@@ -1346,8 +1407,10 @@ export default {
             border-radius: 10px;
             li {
               padding: 6px 0;
+              font-size: 18px;
               p {
-                margin: 4px 0;
+                margin: 8px 0;
+                font-size: 32px;
               }
               &:first-child {
                 border-radius: 10px 10px 0 0;
@@ -1454,6 +1517,8 @@ export default {
               display: flex;
               align-items: center;
               justify-content: center;
+              font-weight: bold;
+              font-size: 30px;
               &:first-child {
                 width: 50px;
                 span {
@@ -1483,17 +1548,18 @@ export default {
 
           .seamless-warp {
             width: 100%;
-            height: calc(100% - 96px);
+            height: calc(100% - 126px);
             overflow: hidden;
             margin: 0 10px;
             ul {
               li {
                 display: flex;
                 padding: 20px 10px;
+                font-size: 30px;
                 &:first-child {
                   // background: #44c9de80 !important;
                   > div {
-                    font-weight: bold;
+                    // font-weight: bold;
                   }
                 }
                 border-bottom: 1px dashed #44c9de80;
@@ -1538,16 +1604,20 @@ export default {
     .bot-box {
       .jbtext {
         text-align: left;
-        // text-indent: 30px;
-
         font-weight: bolder;
         position: relative;
         background-image: -webkit-linear-gradient(
           bottom,
-          #0588c7,
-          #2ca9e2,
-          #5fc5fc
+          #ffffff,
+          #ffffff,
+          #ffffff
         );
+        // background-image: -webkit-linear-gradient(
+        //   bottom,
+        //   #F5713A,
+        //   #2ca9e2,
+        //   #5fc5fc
+        // );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -1622,11 +1692,12 @@ export default {
         }
         .tq-content {
           // border: 1px solid blue;
-          width: 48%;
+          width: 46%;
           height: 80%;
           display: flex;
           justify-content: space-around;
           align-items: center;
+          font-size: 22px;
           .tqimg-box {
           }
           .tqmsg-box {
@@ -1653,12 +1724,20 @@ export default {
           flex-direction: column;
           justify-content: space-evenly;
           align-items: center;
-          width: 48%;
+          width: 52%;
           height: 80%;
+          font-size: 23px;
+          > div {
+            // border:1px solid red;
+          }
+          .tqcontent {
+            font-size: 18px;
+          }
           .nowdate-box {
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             span {
               margin: 0 10px;
             }
@@ -1666,7 +1745,7 @@ export default {
           .min-box {
             // border: 1px solid red;
             font-family: "微软雅黑", "Dosis", sans-serif;
-            font-size: 120px;
+            font-size: 100px;
             text-align: center;
             font-weight: bold;
             text-transform: uppercase;

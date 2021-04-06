@@ -1,6 +1,8 @@
 <template>
   <div class="header-box">
-    <div class="time-box">{{nowTime}}</div>
+    <div class="time-box">
+      <!-- {{nowTime}} -->
+    </div>
     <div class="title-box">崖州区无感考勤系统</div>
     <div class="tq-box">
       <!-- {{tqObj.wea}}
